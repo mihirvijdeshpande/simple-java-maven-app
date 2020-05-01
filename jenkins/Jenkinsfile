@@ -1,5 +1,5 @@
 node{
-pipeline {
+
     
     agent none
     /*agent {
@@ -31,5 +31,5 @@ pipeline {
             }
         }*/
     }
-  }
+ 
 }
