@@ -11,9 +11,7 @@ pipeline{
     }
    
     stages {
-        environment {
-                    SNYK_TOKEN = credentials('snyktoken')
-                }
+        
         stage('Build') {
             steps {
                 
@@ -33,6 +31,9 @@ pipeline{
             }
         }
         stage('Snyk'){
+            environment {
+                    SNYK_TOKEN = credentials('snyktoken')
+                }
             steps{
                 
                 snykSecurity projectName: 'sneak-pipeline-test', snykInstallation: 'SnykPluginTest', snykTokenId: 'snyktoken'
