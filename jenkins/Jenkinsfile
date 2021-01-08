@@ -32,7 +32,10 @@ pipeline{
         stage('Snyk'){
             steps{
                 snykSecurity projectName: 'sneak-pipeline-test', snykInstallation: 'SnykPluginTest', snykTokenId: 'snyktoken'
-                sh 'snyk container test --file=Dockerfile'
+                sh """
+                snyk auth ${snyktoken}
+                snyk container test --json --file=Dockerfile --project-name=docker-check
+                """
             }
         }
        
