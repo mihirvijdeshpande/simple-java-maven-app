@@ -35,11 +35,11 @@ pipeline{
             steps{
                 
                 snykSecurity projectName: 'sneak-pipeline-test', snykInstallation: 'SnykPluginTest', snykTokenId: 'snyktoken'
-                withCredentials([[$class: DefaultSnykApiToken, credentialsId: 'snyktoken', variable: 'SNYK_TOKEN']]){
-                    sh """
+                withCredentials([string(credentialsId: 'snyktkn', variable: 'SNYKE_TOKEN')]) {
+                    sh '''
                     snyk auth ${SNYK_TOKEN}
                     snyk container test --json --file=Dockerfile --project-name=docker-check
-                    """
+                    '''
                 }
             }
         }
