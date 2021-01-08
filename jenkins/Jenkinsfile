@@ -9,11 +9,12 @@ pipeline{
             args '-v /root/.m2:/root/.m2'
         }*/
     }
-   snykSecurity snykInstallation: 'SnykPluginTest', snykTokenId: 'snyktoken', snykSecurity projectName: 'snyk-pipeline-test'
+   
     stages {
         stage('Build') {
             steps {
                 sh 'mvn -B -DskipTests clean package'
+                snykSecurity projectName: 'snyk-pipeline-test', snykSecurity snykInstallation: 'SnykPluginTest', snykTokenId: 'snyktoken'
             }
         }
         stage('Test') {
