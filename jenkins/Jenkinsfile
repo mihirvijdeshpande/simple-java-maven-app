@@ -30,7 +30,9 @@ pipeline{
             }
         }
         stage('Snyk'){
-            snykSecurity projectName: 'sneak-pipeline-test', snykInstallation: 'SnykPluginTest', snykTokenId: 'snyktoken'
+            steps{
+                snykSecurity projectName: 'sneak-pipeline-test', snykInstallation: 'SnykPluginTest', snykTokenId: 'snyktoken'
+            }
         }
        
         /*stage('Deliver') {
