@@ -21,13 +21,16 @@ pipeline{
         stage('Test') {
             steps {
                 sh 'mvn test'
-                snykSecurity projectName: 'sneak-pipeline-test', snykInstallation: 'SnykPluginTest', snykTokenId: 'snyktoken'
+                
             }
             post {
                 always {
                     junit 'target/surefire-reports/*.xml'
                 }
             }
+        }
+        stage('Snyk'){
+            snykSecurity projectName: 'sneak-pipeline-test', snykInstallation: 'SnykPluginTest', snykTokenId: 'snyktoken'
         }
        
         /*stage('Deliver') {
