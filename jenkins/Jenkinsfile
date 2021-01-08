@@ -26,6 +26,12 @@ pipeline{
                 }
             }
         }
+        stage('Snyk'){
+            snykSecurity snykInstallation: 'SnykPluginTest'
+            snykTokenId: 'snyktoken'
+            snyk test
+            snyk monitor
+        }
         /*stage('Deliver') {
             steps {
                 sh './jenkins/scripts/deliver.sh'
