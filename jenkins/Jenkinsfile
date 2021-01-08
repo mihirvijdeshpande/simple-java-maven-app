@@ -31,16 +31,15 @@ pipeline{
             }
         }
         stage('Snyk'){
-            environment {
-                    SNYK_TOKEN = credentials('snyktoken')
-                }
+            
             steps{
                 
-                snykSecurity projectName: 'sneak-pipeline-test', snykInstallation: 'SnykPluginTest', snykTokenId: 'snyktoken'
-                sh """
-                snyk auth ${SNYK_TOKEN}
-                snyk container test --json --file=Dockerfile --project-name=docker-check
-                """
+                snykSecurity projectName: 'sneak-pipeline-test-docker', snykInstallation: 'SnykPluginTest', snykTokenId: 'snyktoken', targetFile: 'Dockerfile'
+                //withCredentials([[$class: DefaultSnykApiToken, ]])
+                //sh """
+                //snyk auth ${SNYK_TOKEN}
+                //snyk container test --json --file=Dockerfile --project-name=docker-check
+                //"""
             }
         }
        
