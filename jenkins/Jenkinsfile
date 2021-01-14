@@ -40,9 +40,9 @@ pipeline{
                 withCredentials([string(credentialsId: 'snyktkn', variable: 'SNYK_TOKEN')]) {
                     sh '''
                     set +e
-                    docker build -t myapp:latest .
+                    docker build -t myapp:latest Dockerfile
                     snyk auth ${SNYK_TOKEN}
-                    snyk container test myapp:latest --json --file=Dockerfile --project-name=docker-check
+                    snyk container test myapp:latest --json --file=Dockerfile --project-name=docker-check-cli
                     '''
                 }
             }
