@@ -42,7 +42,7 @@ pipeline{
                     set +e
                     docker build -t myapp:latest Dockerfile
                     snyk auth ${SNYK_TOKEN}
-                    snyk container test myapp:latest --json --file=Dockerfile --project-name=docker-check-cli
+                    snyk container monitor myapp:latest --json --file=Dockerfile --project-name=docker-check-cli
                     '''
                 }
             }
